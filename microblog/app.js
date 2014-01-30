@@ -66,28 +66,6 @@ app.get('/logout', routes.logout);
 
 
 //
-/*
-var MongoStore = require('connect-mongo')(express);
-var settings = require('./settings');
-app.configure(function(){
- app.set('views', __dirname + '/views');
- app.set('view engine', 'ejs');
- app.use(express.bodyParser());
- app.use(express.methodOverride());
-  
-
-app.use(express.cookieParser());
- app.use(express.session({
-   secret: settings.cookieSecret,
-   store: new MongoStore({
-      db: settings.db
-        })
-          }));
-*/
-//app.use(app.router);
-// app.use(express.router(routes));
-// app.use(express.static(__dirname + '/public'));
-
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
