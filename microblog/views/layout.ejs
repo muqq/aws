@@ -27,6 +27,7 @@
 	       <ul class="nav navbar-nav">
 	         <li class="active"><a href="/">首頁</a></li>
                  <% if (!locals.user) { %>
+                 <% console.log('qqq'+locals.user) ;%>
 		 <li><a class="brand"  href="/login">登入</a></li>
                  <li><a class="brand"  href="/reg">註冊</a></li>
                  <% }else { %>

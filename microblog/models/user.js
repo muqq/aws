@@ -9,7 +9,7 @@ module.exports = User ;
 
 User.prototype.save = function save (callback) {
    var user = {name: this.name,
-                passworld: this.password, };
+                password: this.password, };
     mongodb.open(function(err, db) {
           if (err) { 
   		return callback(err);
@@ -45,7 +45,9 @@ User.get = function get(username, callback) {
 	collection.findOne({name: username}, function(err, doc) {
 		mongodb.close();
 			if (doc){
+				console.log(doc);
 				var user = new User(doc);
+                              
 				callback(err, user);
 				}
 			else {

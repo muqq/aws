@@ -70,15 +70,19 @@ exports.login = function(req,res){
 exports.doLogin = function(req,res){
  User.get(req.body.username, function(err, user){
     var password = req.body.password ;
+	console.log(user);
             if(!user){
                 req.flash('error', '用户不存在'); 
                 return res.redirect('/login'); 
             }
             if(user.password !=password){
+               console.log(password);
+		console.log(user.password);
                 req.flash('error', '密碼錯誤'); 
                 return res.redirect('/login');
             }
-            req.session.user = user;
+            req.session.user = user
+		console.log('check'+req.session.user);
             req.flash('success','登入成功');
             res.redirect('/');
         });
