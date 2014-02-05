@@ -64,13 +64,12 @@ exports.login = function(req,res){
             success:req.flash('success').toString(),
             error:req.flash('error').toString()
         }); 
-
 };
 
 exports.doLogin = function(req,res){
  User.get(req.body.username, function(err, user){
     var password = req.body.password ;
-	console.log(user);
+//	console.log(user);
             if(!user){
                 req.flash('error', '用户不存在'); 
                 return res.redirect('/login'); 
@@ -81,8 +80,8 @@ exports.doLogin = function(req,res){
                 req.flash('error', '密碼錯誤'); 
                 return res.redirect('/login');
             }
-            req.session.user = user
-		console.log('check'+req.session.user);
+            req.session.user = user ;
+		console.log(req.session.user);
             req.flash('success','登入成功');
             res.redirect('/');
         });
