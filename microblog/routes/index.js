@@ -3,10 +3,9 @@
  * GET home page.
  */
 
-var crypto = require('crypto');
 var User = require('../models/user.js');
 exports.index = function(req, res){
-  res.render('layout', { title: '首頁' });
+  res.render('layout', { title: '首頁',user: req.session.user,success:req.flash('success').toString() });
 };
 
 exports.user = function(req, res) {
