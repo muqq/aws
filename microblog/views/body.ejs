@@ -2,22 +2,11 @@
    <h1>歡迎來到 Microblog</h1>
    <p>Microblog 是一個以 Node.js 為基礎的微博系統。</p>
     <p>
-      <a class="btn btn-primary btn-large"  href="/login">登入</a>
-      <a class="btn btn-large" href="/reg">立即註冊</a>
         </p>
         </div>
+<% locals.posts.forEach(function(post, index){ %>
+    <p><h2><a href="#"><%= post.title %></a></h2><time><%= post.time %> by:<a href="#"><%= post.user %></a></time></p>
+    <p><%- post.post %></p>
+<% }) %>
 
-           <div class="row">
-             <div class="col-md-4">
-             <h2>Carbo 說</h2>
-              <p>Carbo</p>
-              </div>
-             <div class="col-md-4">
-              <h2>BYVoid 說</h2>
-               <p>BYVoid</p>
-              </div>
-       <div class="col-md-4">
-        <h2>佛振 說</h2>
-      <p>Hello</p>
-    </div>
 </div>

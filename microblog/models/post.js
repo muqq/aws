@@ -1,6 +1,7 @@
 var mongodb = require('./db');
-function Post(username, post, time) {
+function Post(username,title, post, time) {
 	this.user = username;
+	this.title= title;
 	this.post = post;
 	if (time) {
 		this.time = time;
@@ -12,9 +13,10 @@ module.exports = Post ;
 
 Post.prototype.save = function save (callback) {
 	var post = {
-		user: this.user, post: this.post, time: this.time,};
+		user: this.user,title:this.title, post: this.post, time: this.time,};
 	mongodb.open(function (err, db) {
 		if (err){
+			console.log('20linewrong');
 			return callback(err);
 			}
 	db.collection('posts', function (err, collection) {
@@ -55,7 +57,7 @@ Post.get = function get(username, callback) {
 		var post = new Post(doc.user, doc.post,doc.time);
 		var now = post.time;
 		post.time = now.getFullYear() + "-" + (now.getUTCMonth()+1) + "-" + now.getUTCDate();
-		post.push(post);
+		posts.push(post);
 });
 	callback(null, posts);
 	});

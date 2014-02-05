@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname + '/public')));
 });
 
  app.get('/', routes.index);
-    app.get('/u/:users', routes.user);
+    app.get('/post', routes.dopost);
     app.post('/post', routes.post);
     app.get('/reg', routes.reg);
     app.post('/reg', routes.doReg);

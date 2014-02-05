@@ -10,10 +10,10 @@ exports.index = function(req, res){
 	if (err){
 		post = [];
 		}
-  res.render('layout', { title: '首頁',user: req.session.user,success:req.flash('success').toString() });
+  res.render('layout', { title: '首頁',user: req.session.user,posts:posts,success:req.flash('success').toString() });
 });
 };
-exports.user = function(req, res) {
+exports.dopost = function(req, res) {
 res.render('post',{title:'發表',user:req.session.user, success:req.flash('success').toString(), error:req.flash('error').toString()});
 };
 
@@ -26,7 +26,7 @@ var post = new Post(currentUser.name, req.body.title, req.body.post);
 				return res.redirect('/');
 				}
 			req.flash('success');
-			req.redirect('/');
+			res.redirect('/');
 	});
 	};
 
