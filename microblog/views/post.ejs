@@ -1,9 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script language="JavaScript" type="text/JavaScript">
+  
+
+   
+    function handleFiles(files) {
+      var d = document.getElementById("fileList");
+      if (!files.length) {
+        d.innerHTML = "<p>No files selected!</p>";
+      } else {
+        var list = document.createElement("ul");
+        d.appendChild(list);
+        for (var i=0; i < files.length; i++) {
+          var li = document.createElement("li");
+          list.appendChild(li);
+          
+          var img = document.createElement("img");
+          img.src = window.URL.createObjectURL(files[i]);;
+          img.height = 60;
+          img.onload = function() {
+            window.URL.revokeObjectURL(this.src);
+          }
+          li.appendChild(img);
+          
+          var info = document.createElement("span");
+          info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
+          li.appendChild(info);
+        }
+      }
+    }
+  
+
+</script>
 <title>Blog</title>
 <link rel="stylesheet" href="stylesheets/style.css">
+
 </head>
 <body>
 
@@ -35,13 +69,22 @@
 <% } %> 
 
 
-<form method="post">
+<form method="post" name=form1>
     標題：<br />
     <input type="text" name="title" /><br />
     正文：<br />
     <textarea name="post" rows="20" cols="120"></textarea><br />
     <input type="submit" value="發表" />
 </form>
+
+<form method="post" enctype="multipart/form-data" action="/upload">
+<input type="file" name="file" id="fileElem" multiple="" accept="image/png"  onchange="handleFiles(this.files)">
+<input type="submit" value="上傳">
+</form>
+
+<div id="fileList">
+    
+  </div>
 </article>
 </body>
 </html>

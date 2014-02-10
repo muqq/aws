@@ -19,6 +19,7 @@ res.render('post',{title:'發表',user:req.session.user, success:req.flash('succ
 
 exports.post = function(req,res){
 var currentUser = req.session.user;
+console.log(req);
 var post = new Post(currentUser.name, req.body.title, req.body.post);
 	post.save(function(err){
 			if (err){
@@ -29,7 +30,25 @@ var post = new Post(currentUser.name, req.body.title, req.body.post);
 			res.redirect('/');
 	});
 	};
-
+exports.upload = function(req,res){
+  var path = require('path');
+  var fs = require('fs');
+  var tempPath = req.files.file.path;
+  var targetPath = path.resolve('./uploads/image.png');
+  console.log(req);
+  if (path.extname(req.files.file.name).toLowerCase() === '.png') {
+        fs.rename(tempPath, targetPath, function(err) {
+            if (err) throw err;
+            console.log("Upload completed!");
+            res.redirect('/');
+        });
+    } else {
+        fs.unlink(tempPath, function (err) {
+            if (err) throw err ;
+            console.error("Only .png files are allowed!");
+        });
+      }
+}
 exports.reg = function(req,res){
   res.render('reg', {title:'使用者註冊',user:req.session.user,success:req.flash('success').toString(),error:req.flash('error').toString()});
 

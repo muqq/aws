@@ -44,6 +44,7 @@ app.use(express.static(path.join(__dirname + '/public')));
     app.get('/login', routes.login);
     app.post('/login', routes.doLogin);
     app.get('/logout', routes.logout);
+    app.post('/upload', routes.upload);
   
 // development only
 if ('development' == app.get('env')) {
